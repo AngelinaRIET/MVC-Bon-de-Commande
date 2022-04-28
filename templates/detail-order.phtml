@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bons de commande (classicmodels)</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/orders.css" rel="stylesheet">
+</head>
+<body class="container-fluid">
+    <header class="jumbotron">
+        <h1>Bon de commande n°<?= $_GET['orderNumber'] ?></h1>
+        <hr>
+        <p><< <a href="index.php">Retour à la page principale</a></p>
+    </header>
+
+    <section>
+        <!-- Les coordonnées du client -->
+        <p><strong><?=$order['customerName']?></strong></p>
+        <p><strong><?=$order['contactLastName']?> <?=$order['contactFirstName']?> (Tél.&nbsp;: <?=$order['phone']?>)</strong></p>
+        <p><strong><?=$order['addressLine1']?> <?=$order['addressLine2']?></strong></p>
+        <p><strong><?=$order['postalCode']?> <?=$order['city']?></strong></p>
+        <p><strong><?=$order['country']?> <?=$order['state']?></strong></p>
+
+    </section>
+
+    <table class="table">
+
+        <thead class="thead-dark">
+            <tr>
+                <th>Produit</th>
+                <th class="text-center">Quantité</th>
+                <th class="text-right">Prix Unitaire</th>
+                <th class="text-right">Total</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            <!-- DE LÀ -->
+            <?php foreach ($orderDetails as $oneOrderDetail) : ?>
+            <tr>
+                <td><?=$oneOrderDetail['productName']?></td>
+                <td class="text-center"><?=$oneOrderDetail['quantityOrdered']?></td>
+                <td class="text-right"><?=$oneOrderDetail['priceEach']?>$</td>
+                <td class="text-right"><?=$oneOrderDetail['total']?>$</td>
+            </tr>
+            <!-- À LÀ -->
+            <?php endforeach; ?>
+        </tbody>
+
+        <tfoot>
+            <tr>
+                <th class="text-right" colspan="3">Montant HT</th>
+                <th class="text-right"><?=$totalHT?>$</th>
+            </tr>
+            <tr>
+                <th class="text-right" colspan="3">TVA (20 %)</th>
+                <th class="text-right"><?=$montantTVA?>$</th>
+            </tr>
+            <tr>
+                <th class="text-right" colspan="3">Montant TTC</th>
+                <th class="text-right"><?=$totalTTC?>$</th>
+            </tr>
+        </tfoot>
+       
+    </table>
+</body>
+</html>

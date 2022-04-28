@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bons de commande (classicmodels)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,400">
+    <link rel="stylesheet" href="css/orders.css">
+</head>
+<body class="container-fluid">
+    <header class="jumbotron">
+
+        <h1>Historique des commandes</h1>
+        <h4><?=$nbOrders?> commandes dans la base</h4>
+        <hr>
+        <p>Recherche une ou des commandes en fonction du client</p>
+
+        <form action="index.php" method="POST">
+            <div class="form-row">
+                <div class="col-auto">
+                    <input type="text" class="form-control" name="customerName" placeholder="Client">
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary">Rechercher</button>
+                </div>
+            </div>
+        </form>
+    </header>
+
+    <table class="table table-striped table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>Commande</th>
+                <th>Client</th>
+                <th>Date</th>
+                <th>Statut</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <!-- DE LÀ -->
+            <?php foreach($allOrders as $oneOrder) : ?>
+            <tr>
+                <td>
+                    <a href="detail-order.php?orderNumber=<?=$oneOrder['orderNumber']?>">
+                        <?=$oneOrder['orderNumber']?>
+                    </a>
+                </td>
+                <td><?=$oneOrder['customerNumber']?></td>
+                <td><?=$oneOrder['orderDate']?></td>
+                <td><?=$oneOrder['status']?></td>
+            </tr>
+            <!-- À DE LÀ -->
+            <?php endforeach; ?>
+
+        </tbody>
+    </table>
+</body>
+</html>
